@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--启用注解事务-->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <bean id="druidClusterDataSource" class="com.commons.db.DruidClusterDataSource">
+        <constructor-arg name="dbDriver" value="#{config.dbDriver}"/>
+        <constructor-arg name="dbInitialSize" value="#{config.dbInitialSize}"/>
+        <constructor-arg name="dbMinIdle" value="#{config.dbMinIdle}"/>
+        <constructor-arg name="dbMaxActive" value="#{config.dbMaxActive}"/>
+        <constructor-arg name="dbMasterConfig" value="#{config.dbMasterConfig}"/>
+        <constructor-arg name="dbSlaveConfig" value="#{config.dbSlaveConfig}"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidClusterDataSource"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="druidClusterDataSource"/>
+    </bean>
+
+</beans>

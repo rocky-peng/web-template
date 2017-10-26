@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <!--进行包扫描，找到使用了spring注解的那些类，然后进行实例化和依赖注入-->
+    <context:component-scan base-package="com.manager"/>
+    <context:component-scan base-package="com.service"/>
+    <context:component-scan base-package="com.dao"/>
+
+    <!--支持@Aspect注解-->
+    <aop:aspectj-autoproxy/>
+
+    <util:properties id="config" location="classpath:config.properties"/>
+
+    <import resource="root_redis_context.xml"/>
+    <import resource="root_mysql_context.xml"/>
+
+
+</beans>

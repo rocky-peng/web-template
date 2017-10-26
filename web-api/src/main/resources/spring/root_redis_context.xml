@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="jedis" class="com.commons.redis.JedisFactory" factory-method="getJedis">
+        <constructor-arg name="host" value="#{config.redisHost}"/>
+        <constructor-arg name="port" value="#{config.redisPort}"/>
+        <constructor-arg name="connectionTimeout" value="#{config.redisConnectionTimeout}"/>
+        <constructor-arg name="maxIdle" value="#{config.redisMaxIdle}"/>
+        <constructor-arg name="maxTotal" value="#{config.redisMaxTotal}"/>
+        <constructor-arg name="maxWaitMillis" value="#{config.redisMaxWaitMillis}"/>
+        <constructor-arg name="testOnBorrow" value="#{config.redisTestOnBorrow}"/>
+        <constructor-arg name="blockWhenExhausted" value="#{config.redisBlockWhenExhausted}"/>
+    </bean>
+
+</beans>

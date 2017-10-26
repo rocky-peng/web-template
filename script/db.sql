@@ -1,0 +1,4 @@
+create table user(
+  uid BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '用户id',
+  user_name VARCHAR(10) NOT NULL COMMENT '用户名'
+)COMMENT '用户表';
